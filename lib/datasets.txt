@@ -1,0 +1,7 @@
+Twitter US Airline Sentiment (Kaggle)
+wget https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment/download
+
+amazon_reviews_multi
+from datasets import load_dataset
+
+dataset = load_dataset("amazon_reviews_multi", "en")
