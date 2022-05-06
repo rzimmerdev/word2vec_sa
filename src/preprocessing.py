@@ -13,7 +13,7 @@ def get_dataset(name, lang, split):
     return dataset_train
 
 
-def preprocess(dataframe, col, lang):
+def stem_words(dataframe, col, lang):
     dataframe['tokenized'] = dataframe[col].map(word_tokenize)
 
     stemmer = SnowballStemmer(lang)
@@ -23,6 +23,6 @@ def preprocess(dataframe, col, lang):
 
 if __name__ == "__main__":
     df = get_dataset(name="amazon_reviews_multi", lang="en", split="train")
-    preprocess(df, "review_body", "english")
+    stem_words(df, "review_body", "english")
 
     print(df[['review_body', 'stars', 'stemmed']])
