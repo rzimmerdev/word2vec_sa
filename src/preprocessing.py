@@ -2,6 +2,7 @@ from datasets import load_dataset
 import pandas as pd
 from nltk.tokenize import word_tokenize
 from nltk.stem import SnowballStemmer
+from nltk import download
 
 
 def get_dataset(name, lang, split):
@@ -21,8 +22,15 @@ def stem_words(dataframe, col, lang):
     dataframe['stemmed'] = dataframe['tokenized'].map(lambda text: [stemmer.stem(word) for word in text])
 
 
+def maximum_abs_scale(dataframe, column):
+    dataframe[column] = dataframe[column] / dataframe[column].abs().max()
+
+
 if __name__ == "__main__":
+    download('punkt')
     df = get_dataset(name="amazon_reviews_multi", lang="en", split="train")
     stem_words(df, "review_body", "english")
 
-    print(df[['review_body', 'stars', 'stemmed']])
+    maximum_abs_scale(df, 'stars')
+
+    df[['review_body', 'stars', 'stemmed']].to_csv('../sets/stemmed.csv', quotechar='"', index=False)
