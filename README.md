@@ -1,4 +1,4 @@
-# Word2Vec for Sentiment Analysis
+# W2V + Random Forest Classifier for Sentiment Analysis
 
 This repository implements a data preprocessing script for reading information from large
 text datasets, as well as implementing a Word2Vec model from nltk as well as an implementation
